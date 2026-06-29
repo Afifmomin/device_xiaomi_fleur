@@ -78,6 +78,10 @@ blob_fixups: blob_fixups_user_type = {
     'vendor/lib64/libmnl_mtk.so': blob_fixup()
         .fix_soname()
         .add_needed('libcutils.so'),
+    ('vendor/lib64/libcodec2_mtk_vdec.so', 'vendor/lib64/libcodec2_mtk_venc.so'): blob_fixup()
+        .replace_needed('libformatter.so', 'libformatter_mtk.so'),
+    'vendor/lib64/libformatter_mtk.so': blob_fixup()
+        .fix_soname(),
     (
         'vendor/lib/libteei_daemon_vfs.so',
         'vendor/lib64/libteei_daemon_vfs.so',
