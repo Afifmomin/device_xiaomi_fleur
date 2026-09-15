@@ -43,7 +43,7 @@ lib_fixups: lib_fixups_user_type = {
 
 blob_fixups: blob_fixups_user_type = {
     'system_ext/priv-app/ImsService/ImsService.apk': blob_fixup()
-        .apktool_patch('blob-patches/ImsService/'),
+        .apktool_patch('blob-patches'),
     'system_ext/lib64/libimsma.so': blob_fixup()
         .replace_needed('libsink.so', 'libsink-mtk.so'),
     'system_ext/lib64/libsink-mtk.so': blob_fixup()
@@ -53,9 +53,9 @@ blob_fixups: blob_fixups_user_type = {
     'vendor/bin/mnld': blob_fixup()
         .replace_needed('libsensorndkbridge.so', 'android.hardware.sensors@1.0-convert-shared.so')
         .replace_needed('libmnl.so', 'libmnl_mtk.so'),
-    ('vendor/lib64/libaalservice.so', 'vendor/lib64/libcam.utils.sensorprovider.so'): blob_fixup()
+    ('vendor/lib64/libaalservice.so', 'vendor/lib64/libcam.utils.sensorprovider.so', 'vendor/lib64/librgbwlightsensor.so'): blob_fixup()
         .replace_needed('libsensorndkbridge.so', 'android.hardware.sensors@1.0-convert-shared.so'),
-    ('vendor/lib/libnvram.so', 'vendor/lib64/libnvram.so', 'vendor/lib64/libsysenv.so'): blob_fixup()
+    ('vendor/lib/libnvram.so', 'vendor/lib64/libnvram.so', 'vendor/lib64/libsysenv.so', 'vendor/bin/hw/android.hardware.neuralnetworks@1.3-service-mtk-neuron'): blob_fixup()
         .add_needed('libbase_shim.so'),
     ('vendor/lib64/hw/android.hardware.camera.provider@2.6-impl-mediatek.so', 'vendor/lib64/libmtkcam_stdutils.so'): blob_fixup()
         .replace_needed('libutils.so', 'libutils-v32.so'),
@@ -66,7 +66,7 @@ blob_fixups: blob_fixups_user_type = {
         .add_needed('libutils-v32.so'),
     ('vendor/lib64/hw/android.hardware.gnss-impl-mediatek.so', 'vendor/bin/hw/android.hardware.gnss-service.mediatek'): blob_fixup()
         .replace_needed('android.hardware.gnss-V1-ndk_platform.so', 'android.hardware.gnss-V1-ndk.so'),
-     'vendor/lib/hw/audio.primary.mt6781.so': blob_fixup()
+    'vendor/lib/hw/audio.primary.mt6781.so': blob_fixup()
         .replace_needed('libalsautils.so', 'libalsautils-stock.so')
         .replace_needed('libtinyxml2.so', 'libtinyxml2-v34.so')
         .binary_regex_replace(b'A2dpsuspendonly', b'A2dpSuspended\x00\x00')
@@ -109,8 +109,6 @@ blob_fixups: blob_fixups_user_type = {
         .clear_symbol_version('AHardwareBuffer_lock')
         .clear_symbol_version('AHardwareBuffer_release')
         .clear_symbol_version('AHardwareBuffer_unlock')
-        .add_needed('libbase_shim.so'),
-    ('vendor/lib/libnvram.so', 'vendor/lib64/libnvram.so', 'vendor/lib64/libsysenv.so', 'vendor/bin/hw/android.hardware.neuralnetworks@1.3-service-mtk-neuron'): blob_fixup()
         .add_needed('libbase_shim.so'),
 }  # fmt: skip
 
