@@ -156,8 +156,7 @@ PRODUCT_PACKAGES += \
 
 # FastbootD
 PRODUCT_PACKAGES += \
-    android.hardware.fastboot-service.example_recovery \
-    fastbootd
+    android.hardware.fastboot-service.example_recovery
 
 # Fingerprint
 PRODUCT_PACKAGES += \
